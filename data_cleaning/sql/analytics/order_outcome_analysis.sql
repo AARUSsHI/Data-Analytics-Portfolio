@@ -44,3 +44,13 @@ SELECT
         2
     ) AS delivery_rate_percentage
 FROM orders;
+
+
+
+-- ================================================================
+-- Cancellation Rate
+-- ================================================================
+
+SELECT
+    COUNT(*) FILTER (WHERE order_status = 'canceled') * 100.0 / COUNT(*) AS cancellation_rate
+FROM orders;

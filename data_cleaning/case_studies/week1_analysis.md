@@ -1,30 +1,19 @@
-#Case 1
+## Case Thinking Framework
 
-A company says:
+When metrics change, break into:
 
-Orders increased 30% this month.
+Revenue = Orders × AOV
 
-###Questions asked:
+Orders = Customers × Orders per Customer
 
-Did new customers increase?
+### Example Analysis:
 
-Did existing customers order more?
+If revenue increases:
+- More customers?
+- Higher frequency?
+- Higher order value?
 
-Was there a promotion?
-
-Was there seasonality?
-
-
-#Case 2
-
-Revenue dropped 15%.
-
-###Possible causes:
-
-fewer orders
-
-smaller order value
-
-product mix change
-
-geographic change
+If revenue drops:
+- Fewer orders?
+- Lower AOV?
+- Category mix shift?

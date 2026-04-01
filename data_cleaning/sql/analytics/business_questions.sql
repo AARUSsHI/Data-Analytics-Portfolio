@@ -1,5 +1,7 @@
 -- ================================================================
--- SQL BUSINESS ANALYTICS
+-- BUSINESS OBJECTIVE:
+-- Identify high-value customers and revenue concentration
+-- to improve retention and targeting strategies
 -- ================================================================
 
 

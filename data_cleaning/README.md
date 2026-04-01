@@ -1,23 +1,37 @@
 # E-Commerce Data Analytics Portfolio
 
-This project analyzes the Olist Brazilian e-commerce dataset using SQL and Power BI.
+## 📌 Project Overview
+This project analyzes the Brazilian Olist e-commerce dataset to understand customer behavior, revenue patterns, and operational efficiency.
 
-## Tools Used
-- PostgreSQL
-- SQL
+## 🎯 Objectives
+- Analyze order funnel and identify drop-offs
+- Understand customer retention and repeat behavior
+- Identify high-value customers and revenue drivers
+- Build dashboards for business decision-making
+
+## 🛠️ Tools Used
+- SQL (PostgreSQL)
+- Python (pandas, matplotlib)
 - Power BI
-- GitHub
+- Excel
 
-## Power BI Dashboard
+## 📊 Key Insights
+- Revenue is highly right-skewed with a small % of customers contributing most revenue
+- Majority of customers are one-time buyers (low retention)
+- Order outcome analysis shows a high delivery success rate (~97%) with minimal cancellations
+- São Paulo dominates revenue contribution
 
-This dashboard shows revenue distribution by Brazilian state and product category.
+## 📁 Project Structure
+- `sql/` → All SQL queries (fundamentals → advanced → analytics)
+- `python/` → Data cleaning & analysis notebooks
+- `power_bi/` → Dashboard files
+- `case_studies/` → Business insights & analysis reports
 
-![Dashboard Preview](power_bi/dashboard_preview.png)
+## 📈 Dashboard Preview
+![Dashboard](power_bi/dashboard_preview.png)
 
-## Key Insights
-
-- São Paulo (SP) generates the highest revenue.
-- Health & Beauty and Watches are among the top-performing categories.
-- Revenue is concentrated in a few high-performing states.
-
-## Project Structure
+## 🚀 Business Impact
+This analysis helps businesses:
+- Improve retention strategies
+- Identify revenue-driving segments
+- Optimize order fulfillment process
