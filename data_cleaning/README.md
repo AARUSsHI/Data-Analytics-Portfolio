@@ -38,7 +38,9 @@ This project analyzes the Brazilian Olist e-commerce dataset to understand custo
 ![Dashboard](power_bi/dashboard_preview.png)
 
 ## 🚀 Business Impact
-This analysis helps businesses:
-- Improve retention strategies
-- Identify revenue-driving segments
-- Optimize order fulfillment process
+This analysis enables:
+- Identification of high-value customers for targeted retention strategies
+- Detection of revenue concentration risks
+- Insights into customer churn and repeat purchase behavior
+- Regional optimization based on revenue contribution
+- Funnel improvement opportunities in order processing
