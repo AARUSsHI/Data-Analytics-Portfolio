@@ -21,6 +21,13 @@ This project analyzes the Brazilian Olist e-commerce dataset to understand custo
 - Order outcome analysis shows a high delivery success rate (~97%) with minimal cancellations
 - São Paulo dominates revenue contribution
 
+## ❓ Key Questions Answered
+- Where is revenue concentrated?
+- What percentage of customers drive most revenue?
+- How strong is customer retention?
+- Which regions contribute the most to sales?
+- Where are the biggest drop-offs in the order funnel?
+
 ## 📁 Project Structure
 - `sql/` → All SQL queries (fundamentals → advanced → analytics)
 - `python/` → Data cleaning & analysis notebooks
