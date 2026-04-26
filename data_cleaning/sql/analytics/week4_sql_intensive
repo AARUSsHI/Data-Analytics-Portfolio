@@ -1,0 +1,97 @@
+-- ====================================================
+-- customers whose order value is increasing over time
+-- ====================================================
+
+
+WITH order_values AS(
+    SELECT
+    c.customer_unique_id,
+    o.order_id,
+    o.order_purchase_timestamp,
+    SUM(p.payment_value) as total_value
+    FROM orders o 
+    JOIN payments p 
+      ON o.order_id = p.order_id
+    JOIN customers c
+      ON c.customer_id = o.customer_id
+    GROUP BY
+    c.customer_unique_id,
+    o.order_id,
+    o.order_purchase_timestamp
+),
+
+lagged_orders AS(
+    SELECT
+    customer_unique_id,
+    order_purchase_timestamp,
+    total_value,
+    LAG(total_value) OVER(
+        PARTITION BY customer_unique_id
+        ORDER BY order_purchase_timestamp
+    ) AS prev_order_value
+    FROM order_values
+)
+
+SELECT DISTINCT 
+customer_unique_id,
+prev_order_value,
+total_value
+FROM lagged_orders
+WHERE total_value > prev_order_value;
+
+
+-- ============================================================
+-- top 5 states where: Average Order Value (AOV) > overall AOV
+-- ============================================================
+
+
+WITH order_values AS (
+    SELECT
+    o.order_id,
+    c.customer_state,
+    SUM(p.payment_value) AS order_value
+    FROM orders o
+    JOIN customers c
+      ON o.customer_id = c.customer_id
+    JOIN payments p
+      ON o.order_id = p.order_id
+    GROUP BY o.order_id, c.customer_state
+),
+
+global_average AS (
+    SELECT
+    AVG(order_value) AS global_val
+    FROM order_values
+),
+
+state_average AS (
+    SELECT
+    customer_state,
+    AVG(order_value) AS state_val
+    FROM order_values
+    GROUP BY customer_state
+)
+
+SELECT
+s.customer_state,
+ROUND(s.state_val, 2) AS averaged_value
+FROM state_average s
+CROSS JOIN global_average g
+WHERE s.state_val > g.global_val
+ORDER BY averaged_value DESC
+LIMIT 5;
+
+
+-- ===============================================
+-- customers who: placed only one order ever
+-- ===============================================
+
+
+SELECT
+c.customer_unique_id,
+COUNT(o.order_id) AS order_count
+FROM orders o 
+JOIN customers c
+ON o.customer_id = c.customer_id
+GROUP BY customer_unique_id
+HAVING count(o.order_id) = 1;

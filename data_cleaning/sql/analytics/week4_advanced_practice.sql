@@ -82,35 +82,34 @@ ORDER BY total_orders DESC;
 
 
 WITH product_revenue AS(
-  SELECT
-  pr.product_category_name,
-  oi.product_id,
-  SUM(p.payment_value) AS total_revenue
-  FROM order_items oi
-  JOIN orders o
-    ON o.order_id = oi.order_id
-  JOIN payments p 
-    ON o.order_id = p.order_id
-  JOIN products pr
-    ON pr.product_id = oi.product_id
-  GROUP BY pr.product_category_name, oi.product_id
+    SELECT
+    pr.product_category_name,
+    oi.product_id,
+    SUM(oi.price + oi.freight_value) AS total_revenue
+    FROM order_items oi
+    JOIN products pr
+      ON oi.product_id = pr.product_id
+    GROUP BY pr.product_category_name, oi.product_id
 ),
 
-ranked_products AS(
-  SELECT
-  product_category_name,
-  product_id,
-  total_revenue,
-  RANK() OVER(
-    PARTITION BY product_category_name
-    ORDER BY total_revenue desc
-  ) AS rank
-  from product_revenue
+ranked_products AS (
+    SELECT
+    product_category_name,
+    product_id,
+    total_revenue,
+    RANK() OVER(
+        PARTITION BY product_category_name
+        ORDER BY total_revenue DESC
+    ) AS rank
+    FROM product_revenue
 )
 
-SELECT *
+SELECT
+product_category_name,
+product_id,
+total_revenue
 FROM ranked_products
-WHERE rank <= 3
+WHERE rank <= 3 
 ORDER BY product_category_name, rank;
 
 
