@@ -124,3 +124,34 @@ JOIN mqls m
 GROUP BY origin
 ORDER BY avg_time_to_convert;
 
+
+-- =================================================
+-- Lead Convertion Bucket To Customer
+-- =================================================
+
+WITH convertion_time AS(
+    SELECT
+        c.mql_id,
+        c.won_date::date - m.first_contact_date::date AS time_to_convert
+    FROM closed_deals c
+    JOIN mqls m
+      ON c.mql_id - m.mql_id
+)
+
+SELECT
+    CASE
+        WHEN time_to_convert BETWEEN 0 AND 30 THEN '0-30 days'
+        WHEN time_to_convert BETWEEN 31 AND 60 THEN '31-60 days'
+        WHEN time_to_convert BETWEEN 61 AND 90 THEN '61-90 days'
+        ELSE '90+ days'
+    END AS converted_bucket,
+    COUNT (*) AS deals
+FROM convertion_time
+GROUP BY converted_bucket
+ORDER BY deals DESC;
+
+-- "converted_bucket"	  "deals"
+-- "0-30 days"	            554
+-- "90+ days"	            151
+-- "31-60 days"	            92
+-- "61-90 days"	            45
