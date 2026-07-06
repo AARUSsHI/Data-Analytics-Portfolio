@@ -115,12 +115,16 @@ ORDER BY origin DESC;
 SELECT
     origin,
     ROUND(AVG(won_date::date - first_contact_date::date),2) AS avg_time_to_convert,
+    PERCENTILE_CONT(0.5) WITHIN GROUP(
+		ORDER BY won_date::date - first_contact_date::date
+	) as median_time_to_convert,
     MIN(won_date::date - first_contact_date::date) AS fastest,
     MAX(won_date::date - first_contact_date::date) AS slowest,
     COUNT(*) AS deals
 FROM closed_deals c
 JOIN mqls m
   ON c.mql_id = m.mql_id
+WHERE c.won_date::date >= m.first_contact_date::date
 GROUP BY origin
 ORDER BY avg_time_to_convert;
 
