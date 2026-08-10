@@ -28,4 +28,4 @@ Which channels and landing pages generate the highest quality leads?
 ## Recommendations
 - Increase focus on Paid and Organic Search
 - Audit lead attribution process
-- Reevaluate email acquisition strategy
+- Reevaluate email acquisition strategy 
